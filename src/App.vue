@@ -27,17 +27,23 @@
     <v-content>
       <HelloWorld />
     </v-content>
+
+    <v-content>
+      <Reader />
+    </v-content>
   </v-app>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld";
+import Reader from "./components/Reader";
 
 export default {
   name: "App",
 
   components: {
-    HelloWorld
+    HelloWorld,
+    Reader
   },
 
   data: () => ({
