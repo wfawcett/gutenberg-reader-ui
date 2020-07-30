@@ -1,19 +1,24 @@
 <template>
-  <v-container fluid>
-    <v-row>
-      <v-col cols="12">
-        <v-row
-          :align="alignment"
-          :justify="justify"
-          class="grey lighten-1"
-          style="height: 300px;"
-        >
-          <div>
-            <span class="display-2">Gutenberg Reader:</span><br>
-            <span class="display-1">An RSVP Reader for Project Gutenberg</span>
-          </div>
-          <v-img src="Gutenberg.jpg" max-width="15%" />
-        </v-row>
+  <v-container fluid class="grey lighten-1" style="height: 300px;">
+    <v-row style="padding:15px">
+      <v-col cols="9">
+        <div>
+          <span class="display-2">Gutenberg Reader:</span><br>
+          <span class="display-1">An RSVP Reader for Project Gutenberg</span>
+        </div>
+        <v-text-field
+          v-model="searchPhrase"
+          label="Solo"
+          placeholder="Search books"
+          solo
+          style="max-width:50%"
+        />
+        <v-btn color="primary" @click="doSearch">
+          Search
+        </v-btn>
+      </v-col>
+      <v-col cols="3">
+        <v-img src="Gutenberg.jpg" max-width="70%" />
       </v-col>
     </v-row>
   </v-container>
@@ -23,8 +28,12 @@
 export default {
   data () {
     return {
-      alignment: 'center',
-      justify: 'space-around'
+      searchPhrase: 'testing'
+    }
+  },
+  methods: {
+    doSearch: () => {
+      alert(this.searchPhrase)
     }
   }
 }
