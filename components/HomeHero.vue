@@ -13,12 +13,12 @@
           solo
           style="max-width:50%"
         />
-        <v-btn color="primary" @click="doSearch">
+        <v-btn color="primary" @click="doSearch({searchPhrase})">
           Search
         </v-btn>
       </v-col>
       <v-col cols="3">
-        <v-img src="Gutenberg.jpg" max-width="70%" />
+        <v-img src="Gutenberg.jpg" max-height="250px" />
       </v-col>
     </v-row>
   </v-container>
@@ -28,12 +28,12 @@
 export default {
   data () {
     return {
-      searchPhrase: 'testing'
+      searchPhrase: ''
     }
   },
   methods: {
-    doSearch: () => {
-      alert(this.searchPhrase)
+    doSearch (s) {
+      this.$router.push({ path: 'results', query: { q: s.searchPhrase } })
     }
   }
 }
