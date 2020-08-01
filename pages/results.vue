@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-container>
-      <v-ro>
+      <v-row>
         <v-col>
           <v-text-field
             v-model="searchPhrase"
@@ -14,7 +14,7 @@
             @click:append="doSearch({searchPhrase})"
           />
         </v-col>
-      </v-ro>
+      </v-row>
       <v-row>
         <v-col
           v-for="(item, i) in searchResults"
@@ -23,6 +23,7 @@
         >
           <v-card
             color="#EEE"
+            @click="loadBook({item})"
           >
             <div class="d-flex flex-no-wrap justify-space-between" style="margin-top:8px">
               <div>
@@ -55,21 +56,7 @@ export default {
   data () {
     return {
       searchPhrase: '',
-      searchResults: [],
-      items: [
-        {
-          color: '#1F7087',
-          src: 'https://cdn.vuetifyjs.com/images/cards/foster.jpg',
-          title: 'Supermodel',
-          artist: 'Foster the People'
-        },
-        {
-          color: '#952175',
-          src: 'https://cdn.vuetifyjs.com/images/cards/halcyon.png',
-          title: 'Halcyon Days',
-          artist: 'Ellie Goulding'
-        }
-      ]
+      searchResults: []
     }
   },
   async mounted () {
@@ -85,6 +72,10 @@ export default {
       this.searchPhrase = query
       const { data: { results } } = await this.$axios.get(`https://0d81l0rbi6.execute-api.us-west-2.amazonaws.com/Prod/catalog/search?phrase=${query}`)
       this.searchResults = results
+    },
+    loadBook (handler) {
+      alert(JSON.stringify(handler.item.url))
+      this.$router.push({ path: 'reader', query: { b: handler.item.url } })
     }
   }
 

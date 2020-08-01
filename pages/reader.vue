@@ -10,8 +10,12 @@
           outlined
           tile
         >
-          <pre style="font-size:1px">{{ entireBook }}</pre>
-          </pre>
+          <ul id="mini-book">
+            <li v-for="line in entireBook" :key="line">
+              <pre @click="pickSection({line})" v-html="line" />
+              <br>
+            </li>
+          </ul>
         </v-card>
       </v-col>
       <v-col
@@ -23,7 +27,16 @@
           outlined
           tile
         >
-          One of three columns
+          <v-card fluid>
+            {{ currentWord }}
+          </v-card>
+          <center>
+            <div class="my-2">
+              <v-btn color="primary" @click="runReader()">
+                Start
+              </v-btn>
+            </div>
+          </center>
         </v-card>
       </v-col>
     </v-row>
@@ -34,28 +47,45 @@
 export default {
   data () {
     return {
-      entireBook: []
+      entireBook: [],
+      currentSection: '',
+      currentWord: ''
     }
   },
   async mounted () {
-    let { data } = await this.$axios.get('http://127.0.0.1:8080/files/4357/4357.txt')
+    const book = this.$route.query.b
 
+    let { data } = await this.$axios.get(book)
     data = data.splice(0, 20)
-
-    let markedUp = ''
-    markedUp = data.map((line) => {
-      // line = line.replace(/[\n|\r]/gms, '<br/>')
-      return `<a href="#">${line}</a>`
+    const markedUp = data.map((l) => {
+      return l.replace(/\n/gms, '<br/>')
     })
-
-    this.entireBook = markedUp.join('\n')
+    this.entireBook = markedUp
+  },
+  methods: {
+    pickSection (selection) {
+      let { line } = selection
+      line = line.replace(/<.[^>]*>/gms, ' ')
+      this.currentSection = line
+      this.currentWord = line
+    },
+    runReader () {
+      const words = this.currentSection.split(' ')
+      alert(words.length)
+      for (let index = 0; index < words.length; index++) {
+        const word = words[index]
+        setTimeout(function () { }, 2000)
+        this.currentWord = word
+      }
+    }
   }
+
 }
 </script>
 <style>
-pre a{
+ul{
   font-size: 3px;
-  line-height: 1px;
-  height: 1px;
+  list-style: none;
+  cursor: pointer;
 }
 </style>
