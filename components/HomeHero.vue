@@ -12,13 +12,13 @@
           placeholder="Search books"
           solo
           style="max-width:50%"
+          append-icon="mdi-magnify"
+          @keydown.enter="doSearch({searchPhrase})"
+          @click:append="doSearch({searchPhrase})"
         />
-        <v-btn color="primary" @click="doSearch({searchPhrase})">
-          Search
-        </v-btn>
       </v-col>
       <v-col cols="3">
-        <v-img src="Gutenberg.jpg" max-height="250px" />
+        <v-img src="Gutenberg.jpg" max-width="200px" />
       </v-col>
     </v-row>
   </v-container>
