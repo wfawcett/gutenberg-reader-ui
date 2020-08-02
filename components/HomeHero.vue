@@ -4,7 +4,7 @@
       <v-col cols="9">
         <div>
           <span class="display-2">Gutenberg Reader:</span><br>
-          <span class="display-1">An RSVP Reader for Project Gutenberg</span>
+          <span class="display-1">A Search and RSVP Reader for Project Gutenberg</span>
         </div>
         <v-text-field
           v-model="searchPhrase"

@@ -28,7 +28,7 @@ jobs:
     - name: Build Nuxt App
       run: npm run build
     
-    - name: Build Nuxt App
+    - name: Export Nuxt App
       run: npm run export
 
     - name: Upload to S3
