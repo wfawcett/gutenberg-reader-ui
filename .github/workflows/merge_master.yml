@@ -22,6 +22,8 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
+    - name: Install NPM
+      run: npm i
     
     - name: Build Nuxt App
       run: npm run build
