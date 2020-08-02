@@ -74,7 +74,6 @@ export default {
       this.searchResults = results
     },
     loadBook (handler) {
-      alert(JSON.stringify(handler.item.url))
       this.$router.push({ path: 'reader', query: { b: handler.item.url } })
     }
   }
