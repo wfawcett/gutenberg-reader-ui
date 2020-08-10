@@ -10,6 +10,7 @@
           outlined
           tile
           height="400"
+          style="overflow:auto"
         >
           <ul id="mini-book" height="100px">
             <li v-for="line in entireBook" :key="line">
@@ -63,7 +64,12 @@ export default {
     const book = this.$route.query.b
 
     let { data } = await this.$axios.get(book)
-    data = data.splice(0, 20)
+    console.log('Data', data)
+    if (!data) {
+      const body = await this.$axios.get(book).data
+      data = body.data
+    }
+
     const markedUp = data.map((l) => {
       return l.replace(/\n/gms, '<br/>')
     })
