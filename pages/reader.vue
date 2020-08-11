@@ -57,14 +57,14 @@ export default {
       currentSection: '',
       currentWord: '',
       isReading: false,
-      continueReading: false
+      continueReading: false,
+      wordsPerMinute: 200
     }
   },
   async mounted () {
     const book = this.$route.query.b
 
     let { data } = await this.$axios.get(book)
-    console.log('Data', data)
     if (!data) {
       const body = await this.$axios.get(book).data
       data = body.data
@@ -103,14 +103,14 @@ export default {
           this.isReading = false
           this.continueReading = false
         }
-      }, 300)
+      }, 60000 / this.wordsPerMinute)
     }
   }
 }
 </script>
 <style>
 ul{
-  font-size: 3px;
+  font-size: 6px;
   list-style: none;
   cursor: pointer;
 }

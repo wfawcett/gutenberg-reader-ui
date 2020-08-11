@@ -33,6 +33,8 @@
                 />
 
                 <v-card-subtitle v-text="item.author" />
+                <v-card-text v-text="item.url" />
+                <v-card-text v-text="item.textURL" />
               </div>
 
               <v-avatar
